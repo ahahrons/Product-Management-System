@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+
 public class Product {
     private String productID;
     private String productName;
@@ -6,6 +7,15 @@ public class Product {
     private double price;
     private LocalDate dateEntered;
     private LocalDate dateExpiry;
+
+    public Product(String productID, String productName, String category, double price, LocalDate dateEntered, LocalDate dateExpiry) {
+        this.productID = productID;
+        this.productName = productName;
+        this.category = category;
+        this.price = price;
+        this.dateEntered = dateEntered;
+        this.dateExpiry = dateExpiry;
+    }
 
     public String getProductID() {
         return productID;
@@ -54,5 +64,16 @@ public class Product {
     public void setDateExpiry(LocalDate dateExpiry) {
         this.dateExpiry = dateExpiry;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productID='" + productID + '\'' +
+                ", productName='" + productName + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                ", dateEntered=" + dateEntered +
+                ", dateExpiry=" + dateExpiry +
+                '}';
+    }
 }
