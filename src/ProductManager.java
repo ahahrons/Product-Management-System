@@ -11,9 +11,9 @@ public class ProductManager {
         products.add(product);
     }
 
-    public void updateProduct(Product updatedProduct) {
+    public void updateProduct(String oldID, Product updatedProduct) {
         for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getProductID().equals(updatedProduct.getProductID())) {
+            if (products.get(i).getProductID().equals(oldID)) {
                 products.set(i, updatedProduct);
                 return;
             }

@@ -1,14 +1,12 @@
-import java.time.LocalDate;
-
 public class Product {
     private String productID;
     private String productName;
     private String category;
     private double price;
-    private LocalDate dateEntered;
-    private LocalDate dateExpiry;
+    private String dateEntered;
+    private String dateExpiry;
 
-    public Product(String productID, String productName, String category, double price, LocalDate dateEntered, LocalDate dateExpiry) {
+    public Product(String productID, String productName, String category, double price, String dateEntered, String dateExpiry) {
         this.productID = productID;
         this.productName = productName;
         this.category = category;
@@ -49,19 +47,19 @@ public class Product {
         this.price = price;
     }
 
-    public LocalDate getDateEntered() {
+    public String getDateEntered() {
         return dateEntered;
     }
 
-    public void setDateEntered(LocalDate dateEntered) {
+    public void setDateEntered(String dateEntered) {
         this.dateEntered = dateEntered;
     }
 
-    public LocalDate getDateExpiry() {
+    public String getDateExpiry() {
         return dateExpiry;
     }
 
-    public void setDateExpiry(LocalDate dateExpiry) {
+    public void setDateExpiry(String dateExpiry) {
         this.dateExpiry = dateExpiry;
     }
 

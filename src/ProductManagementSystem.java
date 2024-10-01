@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.time.LocalDate;
 
 public class ProductManagementSystem {
     private Scanner scanner;
@@ -64,9 +63,9 @@ public class ProductManagementSystem {
         double price = scanner.nextDouble();
         scanner.nextLine(); // Consume newline
         System.out.print("Enter the Date (YYYY-MM-dd): ");
-        LocalDate dateEntered = LocalDate.parse(scanner.nextLine());
+        String dateEntered = scanner.nextLine();
         System.out.print("Enter the Date Expiry (YYYY-MM-dd): ");
-        LocalDate dateExpiry = LocalDate.parse(scanner.nextLine());
+        String dateExpiry = scanner.nextLine();
 
         Product product = new Product(id, name, category, price, dateEntered, dateExpiry);
         productManager.addProduct(product);
@@ -86,8 +85,8 @@ public class ProductManagementSystem {
 
     private void updateProductInterface() {
         System.out.print("Enter product ID to update: ");
-        String oldId = scanner.nextLine();
-        Product existingProduct = productManager.viewProduct(oldId);
+        String oldID = scanner.nextLine();
+        Product existingProduct = productManager.viewProduct(oldID);
         if (existingProduct == null) {
             System.out.println("Product not found.");
             return;
@@ -101,7 +100,7 @@ public class ProductManagementSystem {
         String name = scanner.nextLine();
         name = name.isEmpty() ? existingProduct.getProductName() : name;
 
-        System.out.print("Enter the new Product Category: ");
+        System.out.print("Enter the new Product Category (Perishable/Electronic/Clothing/Skincare): ");
         String category = scanner.nextLine();
         category = category.isEmpty() ? existingProduct.getCategory() : category;
 
@@ -109,16 +108,17 @@ public class ProductManagementSystem {
         double price = scanner.nextDouble();
         price = (price == -1) ? existingProduct.getPrice() : price;
 
-        System.out.print("Enter the new Date: ");
-        LocalDate dateEntered = LocalDate.parse(scanner.nextLine());
-        dateEntered = (dateEntered == null) ? existingProduct.getDateEntered() : dateEntered;
+        System.out.print("Enter the new Date (YYYY-MM-dd): ");
+        String dateEntered = scanner.nextLine();
+        dateEntered = dateEntered.isEmpty() ? existingProduct.getDateEntered() : dateEntered;
+        scanner.nextLine();
 
-        System.out.print("Enter the new Date Expiry: ");
-        LocalDate dateExpiry = LocalDate.parse(scanner.nextLine());
-        dateExpiry = (dateExpiry == null) ? existingProduct.getDateExpiry() : dateExpiry;
+        System.out.print("Enter the new Date Expiry (YYYY-MM-dd): ");
+        String dateExpiry = scanner.nextLine();
+        dateExpiry = dateExpiry.isEmpty() ? existingProduct.getDateExpiry() : dateExpiry;
 
         Product updatedProduct = new Product(id, name, category, price, dateEntered, dateExpiry);
-        productManager.updateProduct(updatedProduct);
+        productManager.updateProduct(oldID, updatedProduct);
         System.out.println("Product updated successfully.");
 
     }
