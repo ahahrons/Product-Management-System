@@ -67,13 +67,14 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "productID='" + productID + '\'' +
-                ", productName='" + productName + '\'' +
-                ", category='" + category + '\'' +
-                ", price=" + price +
-                ", dateEntered=" + dateEntered +
-                ", dateExpiry=" + dateExpiry +
-                '}';
+        return String.format("Product:\n" +
+                "Product ID: %s\n" +
+                "Product Name: %s\n" +
+                "Product Category: %s\n" +
+                "Product Price: $%.2f\n" +
+                "Date Entered: %s\n" +
+                "Date Expiry: %s",
+                productID, productName, category, price, dateEntered, dateExpiry);
     }
+
 }

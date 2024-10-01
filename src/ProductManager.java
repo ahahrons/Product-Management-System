@@ -1,58 +1,48 @@
-import java.time.LocalDate;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
 
 public class ProductManager {
-    private List<Product> products;
-    private Scanner scanner;
+    private LinkedList<Product> products;
 
     public ProductManager() {
         products = new LinkedList<>();
-        scanner = new Scanner(System.in);
     }
 
-    public void addProduct() {
-        try {
-            System.out.print("Enter product ID: ");
-            String productID = scanner.nextLine();
-            System.out.print("Enter product name: ");
-            String productName = scanner.nextLine();
-            System.out.print("Enter product category: ");
-            String category = scanner.nextLine();
-            System.out.print("Enter product price: ");
-            double price = Double.parseDouble(scanner.nextLine());
-            System.out.print("Enter the date entered (YYYY-MM-DD): ");
-            LocalDate dateEntered = LocalDate.parse(scanner.nextLine());
-            System.out.print("Enter the expiry date (YYYY-MM-DD): ");
-            LocalDate dateExpiry = LocalDate.parse(scanner.nextLine());
-
-            Product product = new Product(productID, productName, category, price, dateEntered, dateExpiry);
-            products.add(product);
-            System.out.println("Product added successfully.");
-        } catch (Exception e) {
-            System.out.println("Error adding product: " + e.getMessage());
-        }
+    public void addProduct(Product product) {
+        products.add(product);
     }
 
-    public void updateProduct() {
-        try {
-            System.out.print("Enter product ID to update: ");
-            String id = scanner.nextLine();
-            Product product = findProductById(String productID);
-            if (product == null) {
-                System.out.println("Product not found.");
+    public void updateProduct(Product updatedProduct) {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getProductID().equals(updatedProduct.getProductID())) {
+                products.set(i, updatedProduct);
                 return;
             }
+        }
+        throw new IllegalArgumentException("Product not found");
+    }
 
-    private Product findProductById(String productID) {
+    public void deleteProduct(String productID) {
+        products.removeIf(product -> product.getProductID().equals(productID));
+    }
+
+    public Product viewProduct(String productID) {
         for (Product product : products) {
-            if (product.getProductID() == productID) {
+            if (product.getProductID().equals(productID)) {
                 return product;
             }
         }
         return null;
     }
 
-
+    public void displayAllProducts() {
+        if (products.isEmpty()) {
+            System.out.println("No products available.");
+        } else {
+            System.out.println("All Products:");
+            for (int i = 0; i < products.size(); i++) {
+                System.out.println("\n--- Product " + (i + 1) + " ---");
+                System.out.println(products.get(i));
+            }
+        }
+    }
 }
